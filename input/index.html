@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Input Faskes</title>
+</head>
+<body>
+
+    <h2>Form Input Faskes</h2>
+
+    <form action="input.php" onsubmit="return validateForm(event)" method="post">
+
+        <label for="kalurahan">Kalurahan:</label><br>
+        <input type="text" id="kalurahan" name="kalurahan"><br><br>
+
+        <label for="kapanewon">Kapanewon:</label><br>
+        <input type="text" id="kapanewon" name="kapanewon"><br><br>
+
+        <label for="lat">Latitude:</label><br>
+        <input type="text" id="lat" name="latitude"><br><br>
+
+        <label for="long">Longitude:</label><br>
+        <input type="text" id="long" name="longitude"><br><br>
+
+        <label for="praktik">Praktik:</label><br>
+        <input type="text" id="praktik" name="praktik"><br><br>
+
+        <input type="submit" value="Simpan Data">
+
+    </form>
+
+    <p id="informasi" style="color:red;"></p>
+
+    <script>
+        function validateForm(event) {
+            let kalurahan = document.getElementById("kalurahan").value.trim();
+            let kapanewon = document.getElementById("kapanewon").value.trim();
+            let lat = document.getElementById("lat").value.trim();
+            let long = document.getElementById("long").value.trim();
+            let praktik = document.getElementById("praktik").value.trim();
+            let text = "";
+
+            if (kalurahan === "" || kapanewon === "" || praktik === "") {
+                text = "Kalurahan, Kapanewon, dan Praktik tidak boleh kosong!";
+            } else if (isNaN(lat) || lat === "" || Number(lat) < -90 || Number(lat) > 90) {
+                text = "Latitude harus berupa angka valid (-90 s.d 90)";
+            } else if (isNaN(long) || long === "" || Number(long) < -180 || Number(long) > 180) {
+                text = "Longitude harus berupa angka valid (-180 s.d 180)";
+            }
+
+            if (text !== "") {
+                document.getElementById("informasi").innerText = text;
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+</html>
